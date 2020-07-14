@@ -1,0 +1,1583 @@
+{
+	"info": {
+		"_postman_id": "5fb140f1-5562-4008-8e5b-5656dc8dfe56",
+		"name": "Collection v2.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "log in user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4dc7661b-6450-4bbb-8c9a-1ac88be57779",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(200);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var response = pm.response.json();\r",
+							"     pm.expect(response.role).is.to.equal(\"admin\");\r",
+							"     pm.environment.set(\"charge-jwt\", response.jwt);\r",
+							"     postman.setNextRequest(\"create an api key\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/auth/login",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "failed log in",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"nico@charge.io\",\n\t\"password\": \"passwords\"\n}"
+						},
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/auth/login",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 09 May 2020 15:10:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "64"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "X-HTTP-Method-Override, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"40-h1dJHzpnnGoIgVE5eL5wEXDRP1U\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"type\": \"UNAUTHORIZED\",\n        \"message\": \"Incorrect password or email\"\n    }\n}"
+				},
+				{
+					"name": "log in user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"albert@charge.io\",\n    \"password\": \"e=mc2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/auth/login",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 09 May 2020 15:07:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "899"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "X-HTTP-Method-Override, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"383-rTVdGd86htEW7RqRLGj6M+hg/cw\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"013bbb43-dd27-4790-a9d6-f541c4dfff48\",\n    \"role\": \"admin\",\n    \"accountId\": \"15b55f81-a6a4-434d-ba9d-c3778d7b3a1b\",\n    \"firstName\": \"Albert\",\n    \"lastName\": \"Einstein\",\n    \"email\": \"albert@charge.io\",\n    \"isConfirmed\": true,\n    \"isActive\": true,\n    \"numberOfLogins\": 6,\n    \"numberOfFailedLogins\": 0,\n    \"lastLoginDate\": \"2020-05-09T15:06:45.170Z\",\n    \"lastFailedLoginDate\": \"1970-01-01T00:00:00.000Z\",\n    \"devices\": [],\n    \"apiKeys\": [\n        {\n            \"id\": \"f6ae5a00-ed66-4ca2-980f-802c7083e6e2\",\n            \"object\": \"apiKey\",\n            \"userId\": \"013bbb43-dd27-4790-a9d6-f541c4dfff48\",\n            \"apiKey\": \"ZHF2QV0-GFC4ZB5-P1RGT1-FKF6345\",\n            \"name\": \"albert\",\n            \"scope\": \"admin\",\n            \"allowedScopes\": [\n                \"admin\",\n                \"dev\",\n                \"compliance\"\n            ]\n        }\n    ],\n    \"notes\": [],\n    \"statuses\": [],\n    \"jwt\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxM2JiYjQzLWRkMjctNDc5MC1hOWQ2LWY1NDFjNGRmZmY0OCIsImlhdCI6MTU4OTAzNjgzMCwiZXhwIjoxNTg5MjA5NjMwfQ\",\n    \"updatedAt\": \"2020-05-09T15:06:45.152Z\",\n    \"createdAt\": \"2020-05-07T23:13:16.995Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "create an api key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e46c4c24-2659-4c40-b575-0a36c1d53767",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(201);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var response = pm.response.json();\r",
+							"     pm.expect(response.name).is.to.equal(\"adminkey\");\r",
+							"     pm.environment.set(\"charge-apiKey\", response.apiKey);\r",
+							"     pm.environment.set(\"charge-apiKeyID\", response.id);\r",
+							"     postman.setNextRequest(\"get an api key by id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "JWT {{charge-jwt}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"adminkey\",\r\n    \"scope\": \"admin\"\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/apiKeys",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"apiKeys"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create an api key",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"adminkey\",\n\t\"scope\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/apiKeys",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"apiKeys"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "X-HTTP-Method-Override, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "183"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b7-H1Jwy1I/c6Y3kmekXiD5FBV9IWE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Jan 2020 03:49:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"72417340-182e-4e53-a55b-1e7f756f67de\",\n    \"object\": \"apiKey\",\n    \"userId\": \"775671ff-f70d-415d-b523-l20h12134af5\",\n    \"apiKey\": \"A5C2RM8-PWK4521-NAMZ7YN-N3TDH6P\",\n    \"name\": \"adminkey\",\n    \"scope\": \"admin\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get an api key by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5134282f-13a5-4f17-89f0-7decff0b8367",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(200);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var response = pm.response.json();\r",
+							"     pm.expect(response.name).is.to.equal(\"adminkey\");\r",
+							"     postman.setNextRequest(\"FAIL_get an api key by wrong id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Api-Key {{charge-apiKey}}"
+					}
+				],
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/apiKeys/{{charge-apiKeyID}}",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"apiKeys",
+						"{{charge-apiKeyID}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get api key by id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Api-Key Q9J4J5E-KT84VED-Q44EPDG-YE65YFL",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/apiKeys/:apiKeyId",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"apiKeys",
+								":apiKeyId"
+							],
+							"variable": [
+								{
+									"key": "apiKeyId",
+									"value": "72417340-182e-4e53-a55b-1e7f728f67ad"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "183"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b7-H1Jwy1I/c6Y3kmekXiD5FBV9IWE\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Jan 2020 03:52:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"72417340-182e-4e53-a55b-1e7f728f67ad\",\n    \"object\": \"apiKey\",\n    \"userId\": \"775671ff-f70d-415d-b523-f50b05139ac9\",\n    \"apiKey\": \"A5C2RM8-PWK4521-NAMZ7YN-N3TDGLO\",\n    \"name\": \"adminkey\",\n    \"scope\": \"admin\"\n}"
+				}
+			]
+		},
+		{
+			"name": "FAIL_get an api key by wrong id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1a6ec692-75d1-4389-bbd6-a18fa83daab4",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(400);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     postman.setNextRequest(\"delete an api key\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Api-Key {{charge-apiKey}}"
+					}
+				],
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/apiKeys/1231231245435345",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"apiKeys",
+						"1231231245435345"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete an api key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "078ad23d-4f31-4dbf-8f64-78092b26dc03",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(200);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var response = pm.response.json();\r",
+							"     pm.expect(response.scope).is.to.equal(\"deleted\");\r",
+							"     postman.setNextRequest(\"create an api key_again\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Api-Key {{charge-apiKey}}"
+					}
+				],
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/apiKeys/{{charge-apiKeyID}}",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"apiKeys",
+						"{{charge-apiKeyID}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete an api key",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Api-Key A5C2RM8-PWK4521-NAMZ7YN-N3TDH6P",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/apiKeys/:apiKeyId",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"apiKeys",
+								":apiKeyId"
+							],
+							"variable": [
+								{
+									"key": "apiKeyId",
+									"value": "abd274bc-31d0-4f4e-bc10-21ac0bf21000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "108"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6c-YuUtfhD3DWFIogOuD02fEn514zY\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Jan 2020 03:52:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"deleted\",\n    \"object\": \"deleted\",\n    \"userId\": \"deleted\",\n    \"apiKey\": \"deleted\",\n    \"name\": \"deleted\",\n    \"scope\": \"deleted\"\n}"
+				}
+			]
+		},
+		{
+			"name": "create an api key_again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "30d2c500-df1c-4822-99ca-5f24937d0a04",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(201);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var response = pm.response.json();\r",
+							"     pm.expect(response.scope).is.to.equal(\"admin\")\r",
+							"     pm.environment.set(\"charge-apiKey\", response.apiKey);\r",
+							"     pm.environment.set(\"charge-apiKeyID\", response.id);\r",
+							"     postman.setNextRequest(\"create a webhook\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "JWT {{charge-jwt}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"adminkey\",\r\n    \"scope\": \"admin\"\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/apiKeys",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"apiKeys"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create an api key",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"adminkey\",\n\t\"scope\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/apiKeys",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"apiKeys"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "X-HTTP-Method-Override, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "183"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b7-H1Jwy1I/c6Y3kmekXiD5FBV9IWE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 20 Jan 2020 03:49:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"72417340-182e-4e53-a55b-1e7f756f67de\",\n    \"object\": \"apiKey\",\n    \"userId\": \"775671ff-f70d-415d-b523-l20h12134af5\",\n    \"apiKey\": \"A5C2RM8-PWK4521-NAMZ7YN-N3TDH6P\",\n    \"name\": \"adminkey\",\n    \"scope\": \"admin\"\n}"
+				}
+			]
+		},
+		{
+			"name": "create a webhook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9f99bc7b-6bff-42e3-a17b-9109d8b551d1",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(201);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var response = pm.response.json();\r",
+							"     pm.expect(response.name).is.to.equal(\"mywebhook\")\r",
+							"     pm.environment.set(\"charge-hookID\", response.id);\r",
+							"     postman.setNextRequest(\"get a webhook by id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Api-Key {{charge-apiKey}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"mywebhook\",\n\t\"active\": true,\n\t\"url\": \"https://webhook.site/778b0d21-9b8e-498d-8701\",\n\t\"insecure\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/webhooks",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"webhooks"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/webhooks 201 Created",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Api-Key Q9J4J5E-KT84VED-Q44EPDG-YE65LOP",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"mywebhook\",\n\t\"active\": true,\n\t\"url\": \"https://webhook.site/778b0d21-9b8e-498d-8701\",\n\t\"insecure\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/webhooks",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"webhooks"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "X-HTTP-Method-Override, Accept-Encoding"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "251"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"fb-Ut/SwpEOkgUnj9GIng9x7JT4Xic\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 11 Apr 2020 17:11:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2905c715-fb89-4074-9716-10b16a03a522\",\n    \"accountId\": \"15b55f81-a6a4-434d-ba9d-c3778d7b3a1b\",\n    \"name\": \"mywebhook\",\n    \"active\": true,\n    \"url\": \"https://webhook.site/778b0d21-9b8e-498d-8701\",\n    \"insecure\": false,\n    \"createdAt\": \"2020-04-11T17:11:36.501Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get a webhook by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89c81afe-caab-4a70-9bea-8038b07d2041",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(200);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var response = pm.response.json();\r",
+							"     pm.expect(response.active).is.to.equal(true)\r",
+							"     postman.setNextRequest(\"FAIL_get a webhook by wrong id\");\r",
+							"\r",
+							"var template = `\r",
+							"<style>\r",
+							"table, th, td {\r",
+							"  border: 1px solid black;\r",
+							"  border-collapse: collapse;\r",
+							"}\r",
+							"th, td {\r",
+							"  padding: 5px;\r",
+							"  text-align: left;    \r",
+							"}\r",
+							"</style>\r",
+							"\r",
+							"<h2>Vizualization for GET /webhooks/:id</h2>\r",
+							"<p>Id: {{webhook.id}}</p>\r",
+							"\r",
+							"<table style=\"width:100%\">\r",
+							"  <tr>\r",
+							"    <th>AccountId</th>\r",
+							"    <th>Name</th>\r",
+							"    <th>Active</th>\r",
+							"  </tr>\r",
+							"  <tr>\r",
+							"    <td>{{webhook.accountId}}</td>\r",
+							"    <td>{{webhook.name}}</td>\r",
+							"    <td>{{webhook.active}}</td>\r",
+							"  </tr>\r",
+							"</table>\r",
+							"`;\r",
+							"    pm.visualizer.set(template, {\r",
+							"        webhook: response\r",
+							"    });\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Api-Key {{charge-apiKey}}"
+					}
+				],
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/webhooks/{{charge-hookID}}",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"webhooks",
+						"{{charge-hookID}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/webhooks/:id 200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{identityToken}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Api-Key Q9J4J5E-KT84VED-Q44EPDG-YE65LOP",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/webhooks/:id",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"webhooks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2905c715-fb89-4074-9716-10b16a03a522",
+									"description": "The uuid of the webhook"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "251"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"fb-Ut/SwpEOkgUnj9GIng9x7JT4Xic\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 11 Apr 2020 17:12:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2905c715-fb89-4074-9716-10b16a03a522\",\n    \"accountId\": \"15b55f81-a6a4-434d-ba9d-c3778d7b3a1b\",\n    \"name\": \"mywebhook\",\n    \"active\": true,\n    \"url\": \"https://webhook.site/778b0d21-9b8e-498d-8701\",\n    \"insecure\": false,\n    \"createdAt\": \"2020-04-11T17:11:36.501Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "FAIL_get a webhook by wrong id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e6c748b1-0832-4006-9b14-d7b3aa02a6cc",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(404);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     postman.setNextRequest(\"delete a webhook by id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Api-Key {{charge-apiKey}}"
+					}
+				],
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/webhooks/2905c715-fb89-4074-9716-10b16a03a522",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"webhooks",
+						"2905c715-fb89-4074-9716-10b16a03a522"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/webhooks/:id 200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{identityToken}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Api-Key Q9J4J5E-KT84VED-Q44EPDG-YE65LOP",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/webhooks/:id",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"webhooks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2905c715-fb89-4074-9716-10b16a03a522",
+									"description": "The uuid of the webhook"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "251"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"fb-Ut/SwpEOkgUnj9GIng9x7JT4Xic\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 11 Apr 2020 17:12:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2905c715-fb89-4074-9716-10b16a03a522\",\n    \"accountId\": \"15b55f81-a6a4-434d-ba9d-c3778d7b3a1b\",\n    \"name\": \"mywebhook\",\n    \"active\": true,\n    \"url\": \"https://webhook.site/778b0d21-9b8e-498d-8701\",\n    \"insecure\": false,\n    \"createdAt\": \"2020-04-11T17:11:36.501Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "delete a webhook by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0023b01f-d89b-4f3f-abf7-461356371bce",
+						"exec": [
+							"pm.test(\"response must be valid and have a body\", function () {\r",
+							"     pm.expect(pm.response.code).equal(200);\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var response = pm.response.json();\r",
+							"     pm.expect(response.url).is.to.equal(\"deleted\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Api-Key {{charge-apiKey}}"
+					}
+				],
+				"url": {
+					"raw": "{{identityURL}}/{{version}}/webhooks/{{charge-hookID}}",
+					"host": [
+						"{{identityURL}}"
+					],
+					"path": [
+						"{{version}}",
+						"webhooks",
+						"{{charge-hookID}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete a webhook by id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Api-Key Q9J4J5E-KT84VED-Q44EPDG-YE65YLOP",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{identityURL}}/{{version}}/webhooks/:id",
+							"host": [
+								"{{identityURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"webhooks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2905c715-fb89-4074-9716-10b16a03a522"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "137"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"89-2mpO87dxfpeDYVaHICDiLFgKhxQ\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 11 Apr 2020 17:12:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"deleted\",\n    \"accountId\": \"deleted\",\n    \"name\": \"deleted\",\n    \"active\": true,\n    \"url\": \"deleted\",\n    \"insecure\": true,\n    \"events\": \"deleted\",\n    \"createdAt\": null\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "92172303-bf89-47ee-a85d-b480bc3e9df7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e408abac-6050-4c80-8417-abc475b3ae31",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "9daba167-28aa-44af-b48d-1703da7897db",
+			"key": "identityURL",
+			"value": "https://api.identity.charge-dev.net"
+		},
+		{
+			"id": "fceb8b37-61be-4888-899b-f30ff2e563a0",
+			"key": "version",
+			"value": "v1.0"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
